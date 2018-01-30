@@ -6,6 +6,7 @@ print('Loading libraries and initializing ...')
 from keras.applications.resnet50 import ResNet50
 import pandas as pd
 import numpy as np
+import re
 from keras.preprocessing import image
 from keras.applications.resnet50 import preprocess_input, decode_predictions
 import urllib.request
@@ -27,6 +28,7 @@ warnings.filterwarnings("ignore")
 # load dog breeds
 df_dog_breed = pd.read_csv('dog_name.csv')
 dog_names = df_dog_breed.values
+dog_names = [re.sub('_',' ',name[0]).title() for name in dog_names]
 
 # load ResNet50 model
 ResNet50_model = ResNet50(weights='imagenet')
@@ -141,7 +143,7 @@ def model_predict_breed(model: Sequential, img_path: str, is_url=False):
     # create prediction vactor
     predicted_vector = model.predict(feature)
     # return dog breed that has the maximum likelihood
-    print('According to my encyclopaedia, it\'s a/an {}.\n'.format(dog_names[np.argmax(predicted_vector)][0]))
+    print('According to my encyclopaedia, it\'s a/an {}.\n'.format(dog_names[np.argmax(predicted_vector)]))
     return
 
 
