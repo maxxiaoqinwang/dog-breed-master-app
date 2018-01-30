@@ -1,0 +1,10 @@
+.DS_Store
+dogImages/
+lfw/
+saved_models/
+.ipynb_checkpoints/
+bottleneck_features/
+.idea/
+__pycache__/
+test/
+
